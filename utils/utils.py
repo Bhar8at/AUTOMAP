@@ -1,12 +1,10 @@
 import argparse
 
-
 def get_args():
-    argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument(
+    parser = argparse.ArgumentParser(description="AUTOMAP Training Script")
+    parser.add_argument(
         '-c', '--config',
-        metavar='C',
-        default='None',
-        help='The Configuration file')
-    args = argparser.parse_args()
-    return args
+        dest='config',
+        required=True,
+        help='Path to the configuration file')
+    return parser.parse_args()

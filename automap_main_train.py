@@ -6,16 +6,18 @@ from trainers.automap_trainer import AUTOMAP_Trainer
 from utils.config import process_config
 from utils.dirs import create_dirs
 from utils.utils import get_args
-
+import sys
 
 def main():
-    try:
-        args = get_args()
-        config = process_config(args.config)
+    args = get_args()
+    print(f"[DEBUG] Config path: {args.config}")
 
-    except:
-        print("missing or invalid arguments")
-        exit(0)
+    try:
+        config = process_config(args.config)
+    except Exception as e:
+        print(f"[ERROR] Failed to process config: {e}")
+        exit(1)
+
 
     create_dirs([config.summary_dir, config.checkpoint_dir])
     data = DataGenerator(config)
